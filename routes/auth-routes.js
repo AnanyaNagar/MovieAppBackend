@@ -59,10 +59,9 @@ router.post('/login', async (req, res) => {
 // refresh the access token using refresh token 
 router.post('/refresh_token', (req, res) => {
     try {
-        console.log("abro kq daj3kq3tuyg", req.body.refreshToken);
-        const refreshToken = req.body.refreshToken;
+        const refreshToken = req.cookies.refresh_token;
         if (refreshToken == null) return res.status(401).json({ error: 'Null refresh token' });
-        console.log("_______________________");
+        
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
             
             console.log(user);
